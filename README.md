@@ -1,7 +1,7 @@
 ## JS知识图谱
 ---
 ---
-![image](https://github.com/Tuple-list/JavaScript-Study/blob/master/pic/banner.jpg)
+![image](https://github.com/Tuple-list/JavaScript-Study/blob/master/pic/mountains-1412683.svg)
 
 ### 一. 数组
 
