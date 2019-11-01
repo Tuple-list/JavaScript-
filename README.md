@@ -2,6 +2,7 @@
 ---
 ---
 ![image](https://github.com/Tuple-list/JavaScript-Study/blob/master/pic/banner.jpg)
+
 ### 一. 数组
 
   1.创建方法
