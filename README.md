@@ -2,7 +2,7 @@
 ---
 ---
 
-![pic](C:\Users\Administrator\Desktop\wordpress.jpg)	
+![image](wordpress.jpg)
 
 ### 一. 数组
 
