@@ -1,9 +1,7 @@
 ## JS知识图谱
 ---
 ---
-
-![image](wordpress.jpg)
-
+![image](https://github.com/Tuple-list/JavaScript-Study/blob/master/wordpress.jpg)
 ### 一. 数组
 
   1.创建方法
