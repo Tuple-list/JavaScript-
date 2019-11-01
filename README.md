@@ -5,11 +5,11 @@
 ### 一. 数组
 
   1.创建方法
-  + 空数组： var obj = new Array(); 
-  + 指定长度数组  var obj = new Array(size); 
-  + 指定元素数组  var obj = new Array(元素1， 元素2 ...);
-  + 单维数组  var obj =[元素1, 元素2 ...];
-  + 多维数组  var a = new Array([数组序列1], [数组序列1]...);
+  + 空数组： var obj = new Array();		 
+  + 指定长度数组  var obj = new Array(size);		
+  + 指定元素数组  var obj = new Array(元素1， 元素2 ...);			
+  + 单维数组  var obj =[元素1, 元素2 ...];	
+  + 多维数组  var a = new Array([数组序列1], [数组序列1]...);			
   
   2.基本操作
   + 存取数据元素
@@ -17,8 +17,8 @@
     - 多维数组  数组名[外层数组下标][内层元素下标];
     - 特性  数组长度是弹性的，下标从0开始 数组元素可添加到对象中
   + 增加数组  使用"[]"运算符指定一个新目标
-  + 删除数组  delete 数组名[下标];
-  + 遍历数组  for( var 数组元素变量 in 数组)
+  + 删除数组  delete 数组名[下标];	
+  + 遍历数组  for( var 数组元素变量 in 数组)	
   
   3.数组属性
   + constructor  引用对象的构造函数
@@ -30,9 +30,9 @@
    + 1.获取节点   
    
      document	
-      - getElementById 【documet.getElementById(元素ID)】  通过元素ID获取节点 
-      - getElementsByName  通过元素的name属性获取节点  
-      - getElementsByTagName 通过元素标签获取节点 
+      - getElementById 【documet.getElementById(元素ID)】  通过元素ID获取节点	
+      - getElementsByName  通过元素的name属性获取节点	 
+      - getElementsByTagName 通过元素标签获取节点	
       
      节点指针 
       - firstChild 【父节点.firstChild】  获取元素的首个子节点
