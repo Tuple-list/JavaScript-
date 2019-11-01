@@ -1,6 +1,7 @@
 ----
+![image](https://github.com/Tuple-list/JavaScript-Study/blob/master/pic/mountains-1412683.svg)
 ![pic](https://img.shields.io/badge/lable-study-brightgreen)
-![logo]()
+
 ## 声明
 + const命令：  声明常量  
 + let命令：  声明变量  
@@ -30,6 +31,14 @@
    + 数值解构： const{toString: s} = 123 
    + 布尔值解构： const{toString: b} = true 
    + 对象解构 
-     - 形式：  
-     - 默认：  
-     - 改名：  
+     - 形式：  const {x, y} = {x: 1, y: 2}  
+     - 默认：  const{x, y = 2} = {x:1} 
+     - 改名：  const {x, y: z} = {x: 1, y: 2}
+   + 数组解构 
+     - 规则： 数据机构具有Interator接口 可采用数组形式的解构赋值 
+     - 形式： const[x, y] = [1, 2] 
+     - 默认： const[x, y = 2] = [1] 
+   + 函数参结构 
+     - 数组结构
+     
+     
