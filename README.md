@@ -25,6 +25,7 @@
   + length  返回数组长度
   + prototype 通过增加属性和方法扩展数组定义
   
+---
   ### 二. JS DOM 操作
    + 1.获取节点   
    
@@ -78,6 +79,7 @@
     - splitData(offset)	从offset起将文本节点分成两个节点	
     - substring(offset, count)	返回由off起的count个节点
   
+---
  ### 三.JS变量
   
 
