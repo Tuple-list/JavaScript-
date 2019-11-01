@@ -1,7 +1,8 @@
 ## JS知识图谱
 ---
 ---
-![PIC](https:/)
+
+![pic](C:\Users\Administrator\Desktop\wordpress.jpg)	
 
 ### 一. 数组
 
