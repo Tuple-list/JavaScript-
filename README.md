@@ -1,7 +1,7 @@
 ## JS知识图谱
 ---
 ---
-![image](https://github.com/Tuple-list/JavaScript-Study/blob/master/pic/mountains-1412683.svg)
+
 
 ### 一. 数组
 
@@ -81,7 +81,24 @@
     - substring(offset, count)	返回由off起的count个节点
   
 ---
- ### 三.JS变量
+ ### 三.JS变量	
+ 1.命名	
+ + 方法	
+   + 匈牙利命名法： 变量名 = 类型 + 对象描述
+	   - Int	
+		 - Float	
+		 - Boolean	
+		 - String	
+		 - Array	
+		 - Object	
+		 - Function	
+		 - Regular Expression 正则	
+	 + 驼峰命名法	
+	   - 全部小写	      单词之间用下划线分割
+		 - 大小写混合
+		   - 大驼峰 每个单词首字母大写
+			 - 小驼峰 第一个单词首字母小写，其他首字母大写	
+  + 规则
   
 
    
