@@ -1,7 +1,7 @@
 ## JS知识图谱
 ---
 ---
-![image](https://github.com/Tuple-list/JavaScript-Study/blob/master/banner.jpg)
+![image](https://github.com/Tuple-list/JavaScript-Study/blob/master/pic/banner.jpg)
 ### 一. 数组
 
   1.创建方法
