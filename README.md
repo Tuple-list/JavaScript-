@@ -85,24 +85,24 @@
  1.命名	
  + 方法	
    + 匈牙利命名法： 变量名 = 类型 + 对象描述
-	   - Int	
-		 - Float	
-		 - Boolean	
-		 - String	
-		 - Array	
-		 - Object	
-		 - Function	
-		 - Regular Expression 正则	
+	   + Int	
+		 + Float	
+		 + Boolean	
+		 + String	
+		 + Array	
+		 + Object	
+		 + Function	
+		 + Regular Expression 正则	
 	 + 驼峰命名法	
-	   - 全部小写  单词之间用下划线分割
-           - 大小写混合
-	     - 大驼峰 每个单词首字母大写
-	     - 小驼峰 第一个单词首字母小写，其他首字母大写	
+	   全部小写  单词之间用下划线分割		
+     大小写混合		
+	     大驼峰  每个单词首字母大写		
+	     小驼峰  第一个单词首字母小写,其他首字母大写	
 			 
-   + 规则	
-	   + 首字符	
-		 + 组成	
-		 + 禁忌	JS关键词
+ + 规则	
+	 + 首字符 字母或下划线		
+	 + 组成 字母，数字，下划线	
+	 + 禁忌	JS关键词与保留字	
 	
   
 
