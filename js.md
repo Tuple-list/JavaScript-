@@ -24,7 +24,6 @@ function doSomething(){
 var message = "Hi";
 message = 100;
 ```
-
   其实未初始化的变量，在给它赋值时，变量类型就是从undefined变为了其它类型。  
   使用var定义的变量将成为定义该变量的作用域中的局部变量。  
 ```
@@ -45,7 +44,6 @@ console.log(message);     //输出Hi
 ```
 
 > **注意：给未经声明的变量赋值，在严格模式下会导致ReferenceError错误！**   
-
 
 
   可以在一条语句中定义多个变量，支持使用不同类型初始化变量：  
@@ -109,42 +107,43 @@ function
   Boolean类型包含2个值：true和false。  
   ECMAScript中的所有类型的值，都可以调用转型函数Boolean()转换为Boolean值  
   各数据类型转为Boolean值的规则:  
-  <table>
-  <thead>
-    <tr>
-      <th align="center"}>数据类型</th>
-      <th align="center">返回true</th>
-      <th align="center">返回false</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <td>Boolean</td>
-      <td align="center">true</td>
-      <td align="center">false</td>
-    </tr>
-    <tr>
-      <td>String</td>
-      <td align="center">非空字符串</td>
-      <td align="center">空字符串</td>
-    </tr>  
-    <tr>
-      <td>String</td>
-      <td align="center">Number</td>
-      <td align="center">0和NaN</td>
-    </tr>  
-    <tr>
-      <td>Object</td>
-      <td align="center">任何非null对象</td>
-      <td align="center">null</td>
-    </tr>  
-    <tr>
-      <td>Undefined</td>
-      <td align="center">N/A</td>
-      <td align="center">undefined</td>
-    </tr>  
-  </tbody>
-</table>
+<table>
+<thead>
+  <tr>
+    <th align="center"}>数据类型</th>
+    <th align="center">返回true</th>
+    <th align="center">返回false</th>
+  </tr>
+</thead>
+<tbody>
+  <tr>
+    <td>Boolean</td>
+    <td align="center">true</td>
+    <td align="center">false</td>
+  </tr>
+  <tr>
+    <td>String</td>
+    <td align="center">非空字符串</td>
+     td align="center">空字符串</td>
+  </tr>  
+  <tr>
+    <td>String</td>
+    <td align="center">Number</td>
+    <td align="center">0和NaN</td>
+  </tr>  
+  <tr>
+    <td>Object</td>
+    <td align="center">任何非null对象</td>
+    <td align="center">null</td>
+  </tr>  
+  <tr>
+    <td>Undefined</td>
+    <td align="center">N/A</td>
+    <td align="center">undefined</td>
+  </tr>  
+</tbody>
+</table>  
+
   if后的条件语句会自动转换判断条件为Boolean类型  
   
 + Number类型  
