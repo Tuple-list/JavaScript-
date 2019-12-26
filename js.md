@@ -235,6 +235,33 @@ function
   
   toString()会将一个值转为字符串，但null和undefined值没有这个方法。  
   转型函数String()则支持任意类型值转为字符串：  
+  ```
+  console.log(String(10));
+  console.log(String(true));
+  console.log(String(null));
+  console.log(String(undefined));
+  ```  
+  ```
+  [输出]  
+  10  
+  true  
+  null  
+  undefined  
+  ```  
+  在加法运算中需要特别留意数据类型:  
+  ```
+  var num1 = 5;
+  var num2 = 10;
+  console.log("result is:" + num1 + num2);  // [输出]  result is:15  
+  ```  
++ Object类型  
+  Object类型是所有对象的基础。  
+  > var o = new Object();  
+  > var o = new Object; //无参数调用构造函数时可以省略括号  
+> ## 相等操作符  
+  
+
+  
   
 
 
