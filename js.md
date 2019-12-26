@@ -98,9 +98,8 @@ function
   Null类型也只有1个值：null。  
   null表示一个空对象指针，所以typeof null返回的是object。  
   实际上，undefined类型是派生自null值的，所以对他们的相等性测试会返回true：  
-  ```
-  console.log(null == undefined);  [输出] true  
-  ```  
+  > console.log(null == undefined);  [输出] true  
+
   任何情况下，都没有必要将一个变量的值显式设定为undefined；  
   而如果一个变量是用来存储对象的，在初始化时最好明确赋给null值，以区分null和undefined。  
 + Boolean类型  
@@ -149,9 +148,8 @@ function
 + Number类型  
   Number类型使用IEEE754格式来表示整数和浮点数值。  
   对于极大或极小的数值，可以使用科学计数法表示的浮点数值表示：  
-  ```
-  var floatNum = 1.28e2;    //1.28x10^2=128  
-  ```
+  > var floatNum = 1.28e2;    //1.28x10^2=128  
+
   ECMAScript默认会将小数点后超过6位的浮点数用科学计数法表示：  
   ```
   var floatNum = 0.000000003;
@@ -177,8 +175,67 @@ function
   > false  
   > false  
   
+  有3个函数可以将非数值转为数值：Number()、parseInt()、parseFloat()。  
+  Number()函数可以接收任何对象作为参数：  
+  ```
+  console.log(Number(NaN));
+  console.log(Number("123abc"));
+  console.log(Number("123"));
+  console.log(Number(123));
+  console.log(Number(null));
+  console.log(Number(true));
+  ```  
+  > [输出]  
+  > NaN  
+  > NaN  
+  > 123  
+  > 123  
+  > 0  
+  > 1  
   
-
+  parseInt()函数会尝试转换为整数值，只可以接收字符串作为参数，它会依次解析每一个字符直至遇到非数字字符：  
+  ```
+  console.log(parseInt(""));
+  console.log(parseInt("123abc"));
+  console.log(parseInt("abc123"));
+  console.log(parseInt("123",10));    //还可以提供第二个参数：转换时使用的基数，即多少进制
+  console.log(parseInt("3.14"));
+  ```
+  ```
+  [输出]  
+  NaN
+  123
+  NaN
+  123
+  3
+  ```  
+  parseFloat()函数会尝试将接收到的字符串参数转为浮点数或整数：  
+  ```
+  console.log(parseFloat(""));
+  console.log(parseFloat("123abc"));
+  console.log(parseFloat("abc123"));
+  console.log(parseFloat("123.4"));
+  console.log(parseFloat("123.4.5"));
+  console.log(parseFloat("2.56e2"));
+  ```  
+  ```
+  [输出]  
+  NaN  
+  123  
+  NaN  
+  123.4  
+  123.4  
+  256  
+  ```  
++ String类型  
+  String类型包含一些特殊的字符字面量，也叫转义序列，常用的如：\n换行、\r回车、\b空格、\t制表、\\斜杠、\'单引号、\"双引号、\unnnn表示一个Unicode字符。  
+  转义序列会被看做一个字符：  
+  > var a = "a\tb";
+  > console.log(a.length);  // 3  
+  
+  toString()会将一个值转为字符串，但null和undefined值没有这个方法。  
+  转型函数String()则支持任意类型值转为字符串：  
+  
 
 
 
