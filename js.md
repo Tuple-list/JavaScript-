@@ -46,6 +46,8 @@ console.log(message);     //输出Hi
 
 > **注意：给未经声明的变量赋值，在严格模式下会导致ReferenceError错误！**   
 
+
+
   可以在一条语句中定义多个变量，支持使用不同类型初始化变量：  
 ```
 var message = "Hi",
@@ -78,7 +80,7 @@ console.log(typeof /\w/)    //正则表达式类型是object
 function test(){}
 console.log(typeof test)    //函数类型是function，以与普通对象区分  
 ```  
- 
+
 ```
 [输出]
 string
@@ -107,11 +109,10 @@ function
   Boolean类型包含2个值：true和false。  
   ECMAScript中的所有类型的值，都可以调用转型函数Boolean()转换为Boolean值  
   各数据类型转为Boolean值的规则:  
-  
   <table>
   <thead>
     <tr>
-      <th align="center" style="color: red"}>数据类型</th>
+      <th align="center"}>数据类型</th>
       <th align="center">返回true</th>
       <th align="center">返回false</th>
     </tr>
@@ -144,7 +145,41 @@ function
     </tr>  
   </tbody>
 </table>
+  if后的条件语句会自动转换判断条件为Boolean类型  
   
++ Number类型  
+  Number类型使用IEEE754格式来表示整数和浮点数值。  
+  对于极大或极小的数值，可以使用科学计数法表示的浮点数值表示：  
+  ```
+  var floatNum = 1.28e2;    //1.28x10^2=128  
+  ```
+  ECMAScript默认会将小数点后超过6位的浮点数用科学计数法表示：  
+  ```
+  var floatNum = 0.000000003;
+  console.log(floatNum);  [输出] 3e-9  
+  ```  
+  
+  NaN，即非数值（Not a Number），用来表示一个本来要返回数值的操作数未返回数值的情况。  
+  NaN与任何值都不相等，包括NaN本身。  
+  isNaN()函数可以用来确定一个传入的值经过转换后是否“不是数值”：  
+  ```
+  console.log(isNaN(NaN));
+  console.log(isNaN("abc"));
+  console.log(isNaN("123"));    //可以被转为123
+  console.log(isNaN(123));
+  console.log(isNaN(Infinity));    //无穷大
+  console.log(isNaN(true));    //可以被转为1
+  ```  
+  > [输出]  
+  > true  
+  > true  
+  > false  
+  > false  
+  > false  
+  > false  
+  
+  
+
 
 
 
