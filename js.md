@@ -1,7 +1,8 @@
 # JavaScript 学习笔记  
 
 ![](https://img.shields.io/badge/tuple-Javascript-blue)  
-[原文链接](https://skysun.name/blog/javascript)  
+<h3>原文链接</h3>
+[iBlog](https://skysun.name/blog/javascript)  
 
 <h2>JavaScript学习笔记（三）基本概念</h2>  
 
