@@ -1,4 +1,8 @@
 # JavaScript 学习笔记  
+https://img.shields.io/badge/tuple-Javascript-blue
+---
+[原文链接](https://skysun.name/blog/javascript/javascript-study-notes-3-basic-concepts)  
+
 
 > ## 严格模式  
   ECMAScript5引入了严格模式（strict mode）概念，严格模式为JavaScript定义了一种不同的解析与执行模型，
