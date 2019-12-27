@@ -3,9 +3,7 @@
 ![](https://img.shields.io/badge/tuple-Javascript-blue)  
 [原文链接](https://skysun.name/blog/javascript)  
 
-----
 <h2>JavaScript学习笔记（三）基本概念</h2>  
-----
 
 > ## 严格模式  
   ECMAScript5引入了严格模式（strict mode）概念，严格模式为JavaScript定义了一种不同的解析与执行模型，
@@ -408,8 +406,178 @@ function
   15
   ```
 ---  
-<h2>JavaScript学习笔记（三）基本概念</h2> 
+<h2>JavaScript学习笔记（四）基本概念</h2> 
 ---
+
+[摘要] JavaScript中的变量类型、参数传递、执行环境、内存问题等。  
+> ## 基本类型和引用类型的值  
+  基本类型的值在内存中占据固定大小的空间，保存在栈中；引用类型的值是对象，保存在堆中。  
+  + 动态属性  
+  对于引用类型的值，可以动态的为其添加属性和方法。  
+  ```
+  var person = new Object();
+  person.name = "Sky";
+  console.log(person.name);
+  ```
+  ```
+  [输出]
+  Sky
+  ```
+  而对于基本类型的值，添加属性或方法无效。  
+  ```
+  var person = "person";
+  person.name = "Sky";
+  console.log(person.name);
+  ```
+  ```
+  [输出]
+  undefined
+  ```
+  > 注意：ECMAScript中String是基本类型（5个基本类型：undefined、null、Boolean、Number、String）。  
+  + 复制变量值  
+  基本类型的值在复制时，会在变量对象上创建一个新值，然后将该值复制到为新变量分配的位置上，即复制后两个变量是完全独立的，不会相互影响。  
+  ```
+  var num1 = 5;
+  var num2 = num1;
+  num1 = 10;
+  console.log(num2);
+  ```
+  ```
+  [输出]
+  5
+  ```
+  当从一个变量向另一个变量复制引用类型值时，两个变量都将指向同一个对象，改变其中任何一个变量，都会影响另外一个。  
+  ```
+  var obj1 = new Object();
+  var obj2 = obj1;
+  obj1.name = "Sky";
+  console.log(obj2.name);
+  obj2.age = "26";
+  console.log(obj1.age);
+  ```
+  ```
+  [输出]
+  Sky
+  26
+  ```
+  + 传递参数  
+  函数的参数，不论是基本类型还是引用类型，都是按值传递的。  
+  下面的例子证明了引用类型的参数也是传递的值而非引用：  
+  ```
+  function setName(obj){
+    obj.name = "Sky";
+    obj = new Object();
+    obj.name = "Tom";
+  }
+  var person = new Object();
+  setName(person);
+  console.log(person.name); // 如果是按引用传递，则传入的person会被重新初始化，但事实没有，这就说明了传入参数的原始的引用保持未变。  
+  ```
+  ```
+  [输出]
+  Sky
+  ```
+  + 检测基本类型  
+  typeof操作符是确定一个变量是字符串、数值、布尔值，还是undefined的最佳工具。  
+  ```
+  var message = "Hi";
+  var msg;
+  console.log(typeof message);
+  console.log(typeof(message));
+  console.log(typeof 3.14);
+  console.log(typeof true);
+  console.log(typeof msg);    //声明之后并未初始化值，类型是undefined
+  console.log(typeof msg1);    //对于未声明的变量，类型依旧是undefined
+  console.log(typeof null);    //对象或者null，类型是object
+  console.log(typeof undefined);    //undefined类型是undefined
+  console.log(typeof /\w/)    //正则表达式类型是object
+  function test(){}
+  console.log(typeof test)    //函数类型是function，以与普通对象区分
+  ```
+  ```
+  [输出]
+  string
+  string
+  number
+  boolean
+  undefined
+  undefined
+  object
+  undefined
+  object
+  function
+  ```
+  + 检测引用类型  
+  检测引用类型时，还可以使用instanceof操作符，语法为：variable instanceof constructor，如果变量是给定引用类型的实例则返回true。  
+  ```
+  var dog = new Object();
+  console.log(dog instanceof Object);
+  console.log("wang" instanceof Object);
+  ```
+  ```
+  [输出]
+  true
+  false
+  ```
+  确定一个值是哪种基本类型可以用typeof，是哪种引用类型可以用instanceof。  
+
+> ## 执行环境  
+  执行环境（execution context）是JavaScript中最重要的一个概念，它定义了变量和函数有权访问的其它数据，决定了它们各自的行为。每一个执行环境当中定义的   所有的变量和函数都保存在一个变量对象（variable object）中。  
+  执行环境分为全局执行环境和局部（函数）执行环境，全局执行环境是最外围的一个执行环境，对Web浏览器来说，全局执行环境就是window对象，所有全局变量和函   数都是作为window对象的属性和方法创建的。每个函数也都有自己的执行环境，即局部执行环境。  
+  
+  JavaScript中没有块级作用域的概念，在if或for中定义的变量，在外部依然可以访问到，因为它们处在相同的执行环境中。  
+  ```
+  if(true){
+    var color = "blue";
+  }
+  console.log(color);
+  ```
+  ```
+  [输出]
+  blue
+  ```
+  查询标识符时，会沿作用域链向上搜索，一直追溯到全局环境的变量对象，即越里面的标识符优先级越高。一旦找到就立即停止搜索。  
+  ```
+  var color = "blue";
+  function getColor(){
+    var color = "red";
+    return color;
+  }
+  console.log(getColor());
+  console.log(color);
+  console.log(window.color);
+  ```
+  ```
+  [输出]
+  red
+  blue
+  blue
+  ```
+> ## 垃圾收集  
+  “标记清除”是目前主流的垃圾收集算法，这种算法的思想是给当前不是用的值加上标记，然后再回收其内存。  
+  分配给Web浏览器的可用内存通常比分配给桌面应用程序的少，这样做的目的主要是处于安全方面的考虑，防止运行JavaScript的网页耗尽全部系统内存而导致系统崩   溃。  
+  
+  优化内存占用的最佳方式，就是为执行中的代码只保存必要的数据。一旦数据不再有用，则将其设为null来释放引用，这种做法叫解除引用（dereferencing）。  
+  
+  ```
+  function createPerson(name){
+    var localPerson = new Object();
+    localPerson.name = name;
+    return localPerson;    //函数执行完退出其执行环境时，localPerson即被销毁，所以无需解除引用
+  }
+  var globalPerson = createPerson("Sky");
+
+  //当不再使用该全局的变量时，则解除引用
+  globalPerson = null;
+  ```
+
+
+
+
+  
+  
+
+
 
   
 
