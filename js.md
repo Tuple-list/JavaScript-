@@ -1,8 +1,11 @@
 # JavaScript 学习笔记  
-https://img.shields.io/badge/tuple-Javascript-blue
----
-[原文链接](https://skysun.name/blog/javascript/javascript-study-notes-3-basic-concepts)  
 
+![](https://img.shields.io/badge/tuple-Javascript-blue)  
+[原文链接](https://skysun.name/blog/javascript)  
+
+----
+<h2>JavaScript学习笔记（三）基本概念</h2>  
+----
 
 > ## 严格模式  
   ECMAScript5引入了严格模式（strict mode）概念，严格模式为JavaScript定义了一种不同的解析与执行模型，
@@ -171,13 +174,13 @@ function
   console.log(isNaN(Infinity));    //无穷大
   console.log(isNaN(true));    //可以被转为1
   ```  
-  > [输出]  
-  > true  
-  > true  
-  > false  
-  > false  
-  > false  
-  > false  
+  [输出]  
+  true  
+  true  
+  false  
+  false  
+  false  
+  false  
   
   有3个函数可以将非数值转为数值：Number()、parseInt()、parseFloat()。  
   Number()函数可以接收任何对象作为参数：  
@@ -189,13 +192,13 @@ function
   console.log(Number(null));
   console.log(Number(true));
   ```  
-  > [输出]  
-  > NaN  
-  > NaN  
-  > 123  
-  > 123  
-  > 0  
-  > 1  
+  [输出]  
+  NaN  
+  NaN  
+  123  
+  123  
+  0  
+  1  
   
   parseInt()函数会尝试转换为整数值，只可以接收字符串作为参数，它会依次解析每一个字符直至遇到非数字字符：  
   ```
@@ -263,7 +266,153 @@ function
   > var o = new Object();  
   > var o = new Object; //无参数调用构造函数时可以省略括号  
 > ## 相等操作符  
+  ECMAScript提供了2组相等操作符：相等和不相等（==和!=）——先转换再比较，全等和不全等（===和!==）——仅比较不转换。  
+  ```
+  console.log(null == undefined)
+  console.log(NaN == NaN)
+  console.log(NaN != NaN)
+  console.log(false == 0)
+  console.log(5 == "5")
+  ```  
+  ```
+  [输出]
+  true
+  false
+  true
+  true
+  true
+  ```  
   
+  console.log(5 == "5")    //转换后的值相同，则相等  true  
+  console.log(5 === "5")    //类型不同，则不全等     false  
+  
+> ## 语句  
++ do-while语句  
+  do-while循环会先执行后判断，即循环体内的代码至少会被执行一次：  
+  ```
+  var i=0;
+  do{
+    i+=2;
+  }while(i<10);
+  console.log(i);
+  ```
+  ```
+  [输出] 
+  10  
+  ```
++ while语句  
+  while循环会先判断再执行：  
+  ```
+  var i=0;
+  while(i<10){
+    i+=2;
+  }
+  console.log(i);
+  ```
+  ```
+  [输出]
+  10
+  ```
++ for语句  
+  一个简单的for循环  
+  ```
+  for(var i=0;i<10;i++){
+    console.log(i);
+  }
+  console.log(i);
+  ```
+  > 注意：在整个循环体内部定义的变量，在循环体外也依然可以获取。  
++ for-in语句  
+  for-in可以用来枚举对象的属性：  
+  ```
+  for(var propName in window){
+  console.log(propName);
+  }
+  ```
+  > 注意：在枚举前最好先检测对象是否为null或undefined，否则可能会报错。  
++ lable、break与continue语句  
+  使用label语句可以在代码中添加标签，以便将来使用，常用在for循环前面。  
+  break会跳出整个循环，执行循环体后面的语句；continue会跳出本次循环，开始下一次循环。  
+  ```
+  var num = 0;
+  outermost:    //定义一个标签
+  for(var i = 0;i < 10;i++){
+    for(var j = 0;j < 10;j++){
+      if(i == 5&&j == 5){
+        break outermost;    //跳出标签所在的外部循环
+      }
+      num++;
+    }
+  }
+  console.log(num);
+  ```
+  ```
+  [输出]
+  55
+  ```
++ switch语句  
+  ```
+  var i = 1;
+  switch(i){
+    case 0:
+      console.log(0);
+      break;
+    case 1:    //没有break，则不会跳出，会与下面的情形合并
+    case 2:
+    console.log("1 or 2");
+      break;
+    default:
+      console.log("others");
+      break;
+  }
+  ```
+  ```
+  [输出]
+  1 or 2
+  ```
+  > 注意：switch语句在比较时采用的是全等（===）操作符，即类型和值都要一致。  
+  
+> ## 函数  
+  + arguments对象  
+  ECMAScript函数的一个重要特点：命名的参数只提供便利，但不是必需的。在函数内部可以使用arguments对象来访问参数数组。  
+  ```
+  sayHello("Morning","Sky");
+
+  function sayHello(){
+    console.log("Good "+arguments[0]+","+arguments[1]);
+  }
+  ```
+  + 没有重载  
+  由于ECMAScript函数的参数是由包含零个或多个值的数组来表示的，没有函数签名，所以不能重载。  
+  但可以根据传入参数的类型和长度（argument.length），来作出不同反应以模拟重载。  
+  ```
+  function doAdd(){
+    if(arguments.length == 1){
+      console.log(arguments[0] + 10);
+    }else if(arguments.length > 1){
+      var sum = 0;
+      for(var i in arguments){
+        sum+=Number(arguments[i]);
+      }
+      console.log(sum);
+    }else{
+      console.log(0);
+    }
+  }
+  doAdd(10);
+  doAdd(1,2,3,4,5);
+  ```
+  ```
+  [输出]
+  20
+  15
+  ```
+---  
+<h2>JavaScript学习笔记（三）基本概念</h2> 
+---
+
+  
+
 
   
   
