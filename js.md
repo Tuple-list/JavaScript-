@@ -572,9 +572,664 @@ function
   //当不再使用该全局的变量时，则解除引用
   globalPerson = null;
   ```
+  
+---  
+<h2>JavaScript学习笔记（五）引用类型</h2>   
+---
+> ## Object类型  
+  创建引用类型（如Object）实例的方式有2种，第一种是使用new操作符后跟Object构造函数：  
+  ```
+  var person = new Object();
+  person.name = "Sky";
+  person.age = 26;
+  ```
+  另一种是使用对象字面量表示法，对象字面量是对象定义的一种简写形式。  
+  ```
+  var person = {
+      name : "Sky",
+      "age" : 26    //属性名的双引号可省略
+  };
+  ```
+  ```
+  var person = {};
+  //等价于：var person = new Object();
+  person.name = "Sky";
+  ```
+  对象字面量还可以用来向函数传递大量可选参数。  
+  ```
+  function displayInfo(args){
+    var output = "";
+    if(typeof args.name == "string"){
+      output += "name: " + args.name + "\n";
+    }
+    if(typeof args.age == "number"){
+      output += "age: " + args.age + "\n";
+    }
+    console.log(output);
+  }
+
+  displayInfo({
+    name: "Sky",
+    age: 26
+  });
+
+  displayInfo({
+    name: "Sky"
+  });
+  ```
+  ```
+  [输出]
+  name: Sky
+  age: 26
+  name: Sky
+  ```
+  访问对象的属性可以使用点表示法或者方括号表示法。  
+  方括号表示法的主要优点是：可以通过变量来访问属性，或者属性名可能引发语法错误时使用。  
+  ```
+  console.log(person.name);
+  console.log(person["name"]);
+  var attrName = "first name";
+  console.log(person[attrName]);    //若使用person.first name显然会报错
+  ```
+
+
+> ## Array类型  
+  + 创建数组  
+  创建数组的方法：  
+  ```
+  var colors = new Array();
+  var colors = new Array(3);    //创建一个长度为3的数组
+  var colors = new Array("red", "blue", "green");    //创建数组并传递应该包含的项
+  var colors = Array();    //new可以省略
+  ```
+  也可以使用数组字面量表示法：  
+  ```
+  var colors = [];    //创建空数组
+  var colors = ["red", "blue", "green"];    //创建包含3个项的数组
+  ```
+  + 访问数组  
+  使用数字索引来访问或设置数组的值。  
+  ```
+  var colors = ["red", "blue", "green"];
+  console.log(colors[0]);
+  colors[4] = "yellow";    //索引不存在则新建项
+  colors[colors.length] = "brown";    //利用length属性可以方便地在数组末尾添加项
+  console.log(colors);
+  ```
+  ```
+  [输出]
+  red
+  ["red", "blue", "green", undefined, "yellow", "brown"]
+  ```
+  > 注意：数组的length属性不是只读的！  
+  
+  ```
+  var colors = ["red", "blue", "green"];
+  colors.length = 2;    //最后一项被删除了
+  console.log(colors);
+  ```
+  ```
+  [输出]
+  ["red", "blue"]
+  ```
+  + 检测数组  
+  检测一个值是否是数组：  
+  ```
+  colors instanceof Array
+  ```
+  在IE9+浏览器上，还可以使用更准确的方法——Array.isArray()函数：  
+  ```
+  Array.isArray(colors)
+  ```
+  + 输出数组  
+  使用toString()、valueOf()、join()可以将数组直接输出出来，默认以逗号分隔每项。  
+  
+  ```
+  alert(colors.toString());
+  alert(colors.valueOf());
+  alert(colors);    
+  alert(colors.join());
+  alert(colors.join("|"));
+  ```
+  ```
+  [输出]
+  red,blue
+  red,blue
+  red,blue
+  red,blue
+  red|blue
+  ```
+  + push与pop  
+  栈是一种LIFO（Last-In-First-Out，后进先出）的数据结构，ECMAScript为数组提供了push()-推入和pop()-弹出的方法实现栈的行为。  
+  push()接收任意数量参数，逐个添加到数组末尾，返回修改后数组长度；  
+  pop()移除末尾项并返回该项。  
+  ```
+  var colors = new Array();
+  colors.push("red", "blue");
+  colors.pop();
+  ```
+  + shift与unshift  
+  队列的访问规则是FIFO（First-In-First-Out，先进先出），在末尾添加项，在前端移除项。  
+  shift()能移除数组的第一项并返回该项，unshift()能够从前端添加任意多项，并返回修改后数组长度。  
+  ```
+  var colors = new Array();
+  colors.push("red", "blue");
+  colors.shift();
+  colors.unshift("green", "yellow");
+  ```
+  + 数组排序  
+  reverse()函数可以反转数组中的项，sort会转换数组中的项为字符串后，再按升序进行排列。  
+  ```
+  var nums = [0,1,5,10,15];
+  nums.reverse();
+  console.log(nums);
+  nums.sort();
+  console.log(nums);
+  ```
+  ```
+  [输出]
+  [15, 10, 5, 1, 0]
+  [0, 1, 10, 15, 5]
+  ```
+  由于sort()比较的是字符串，上例的排序并非我们想要的。但sort()支持接收一个比较函数作为参数，让我们指定比较规则。  
+  ```
+  var nums = [0,1,5,10,15];
+  nums.sort(compare);
+  console.log(nums);
+
+  //升序比较规则函数
+  function compare(value1,value2){
+    return value1 - value2;
+  }
+  ```
+  ```
+  [输出]
+  [0, 1, 5, 10, 15]
+  ```  
+  
+  + 合并数组  
+  concat()会返回当前数组的副本，如果传入参数，则会将参数添加到数组末尾后再返回新的数组。  
+  ```
+  var colors = ["red","blue"];
+  var colors2 = colors.concat("green",["white","brown"]); 
+  console.log(colors.toString());
+  console.log(colors2.toString());
+  ```
+  ```
+  [输出]
+  red,blue
+  red,blue,green,white,brown
+  ```
+  + 截取子数组  
+  slice()会基于原数组返回一个子数组，原数组不会改变。第一个参数是起始位置，第二个参数（可选）是结束位置。注意：包含起始位置项但不包含结束位置项！  
+  ```
+  var colors = ["red","blue","green", "white"];
+  var colors2 = colors.slice(1);
+  var colors3 = colors.slice(1,3);    //含1但不含3
+  console.log(colors.toString());
+  console.log(colors2.toString());
+  console.log(colors3.toString());
+  ```
+  ```
+  [输出]
+  red,blue,green,white
+  blue,green,white
+  blue,green
+  ```
+  + splice方法  
+  splice()算是最强大的数组方法了，主要的用法：  
+  删除：splice(0,2)删除第0位置开始的2项；  
+  插入：splice(1,0,"a","b")删除位置1开始的0项（即不删除项），并在位置1处插入"a","b"两项；  
+  替换：splice(1,1,"a","b")删除位置1开始的1项，并在位置1处插入"a","b"两项。  
+  > 注意：splice是直接修改原数组的，返回值是被删除的数组集合。  
+  ```
+  var colors = ["red","blue","green", "white"];
+  var removed = colors.splice(0,1);
+  console.log(colors.toString());
+  console.log(removed.toString());
+  removed = colors.splice(1,0,"yellow");
+  console.log(colors.toString());
+  console.log(removed.toString());
+  removed = colors.splice(1,2,"black","gray");
+  console.log(colors.toString());
+  console.log(removed.toString());
+  ```
+  ```
+  [输出]
+  blue,green,white
+  red
+  blue,yellow,green,white
+  (空字符串)
+  blue,black,gray,white
+  yellow,green
+  ```
+  + 获取位置  
+  indexOf()从位置0开始查找项，lastIndexOf()从数组末尾开始查找。可选的第2个参数：开始查找的起点位置。  
+  ```
+  var colors = ["red","blue","green","red", "white"];
+  console.log(colors.indexOf("red"));
+  console.log(colors.indexOf("red",1));
+  console.log(colors.lastIndexOf("red"));
+  ```
+  ```
+  [输出]
+  0
+  3
+  3
+  ```
+  > 注意：比较项是否相等，采用的是全等操作符（===），类型和值都必须一致。  
+  
+  + 数组迭代  
+  几个常用的迭代函数：  
+  every()：对数组中每一项运行指定函数，全部为true则返回true；  
+  some()：只要有一项为true则返回true；  
+  filter()：返回运行函数返回为true的所有项组成的数组；  
+  map()：返回运行函数返回值组成的数组；  
+  forEach()：对数组中每一项运行指定函数，无返回值。  
+  ```
+  var nums = [1,2,3,4,5];
+
+
+  var everyResult = nums.every(function(item,index,array){
+    if(item > 2){
+      return true;
+    }
+  });
+  console.log(everyResult.toString());
+
+  var someResult = nums.some(function(item,index,array){
+    if(item > 2){
+      return true;
+    }
+  });
+  console.log(someResult.toString());
+
+  var filterResult = nums.filter(function(item,index,array){
+    if(item > 2){
+      return true;
+    }
+  });
+  console.log(filterResult.toString());
+
+  var mapResult = nums.map(function(item,index,array){
+    return item+1;
+  });
+  console.log(mapResult.toString());
+
+  var sum = 0;
+  nums.forEach(function(item,index,array){
+    sum += item;
+  });
+  console.log(sum);
+  console.log(nums.toString());    //上面的操作不会修改原数组
+  ```
+  ```
+  [输出]
+  false
+  true
+  3,4,5
+  2,3,4,5,6
+  15
+  1,2,3,4,5
+  ```
+> ## Date类型  
+  使用new Date()创建一个日期对象。  
+  Date.parse()和Date.UTC()都返回表示日期的毫秒数，Date.parse()传递一个表示日期的字符串，而Date.UTC()传入年、月、日、时、分、秒，其中年、月必填，月是从0开始，小时是24小时制的。  
+  ```
+  var now = new Date();    //当前时间
+  var date1 = new Date("8/19/2015");
+  var date2 = new Date(Date.parse("8/19/2015"));    //与上面等价
+  var date3 = new Date(2015,10,17,22,18,56);    //注意10代表11月，因为月份是从0开始的    
+  var date4 = new Date(Date.UTC(2015,10,17,22,18,56));    //与上面等价
+  ```
+  关于Date类型的常用方法：  
+  ```
+  var now = new Date();
+  console.log(now.getFullYear());
+  console.log(now.getMonth());    //从0开始的月份
+  console.log(now.getDate());    
+  console.log(now.getDay());    //星期几，0代表星期日
+  console.log(now.getHours());
+  console.log(now.getMinutes());
+  console.log(now.getSeconds());
+  console.log(now.getMilliseconds());
+  console.log(now.getTimezoneOffset());    //本地时间与UTC时间相差的分钟数
+  ```
+  ```
+  [输出]
+  2015
+  7
+  19
+  3
+  22
+  15
+  22
+  239
+  -480
+  ```
+
+> ## RegExp类型  
+  创建正则表达式：var expression = / pattern / flags ;  
+  其中，模式（pattern）部分是正则表达式，flags代表1个或多个标志，可能的标志包括：  
+  g：全局模式，模式被应用于所有字符串，而非发现第一个匹配后就立即停止；  
+  i：忽略大小写；  
+  m：多行模式。  
+  模式中用到的所有元字符必须在前面加"\"转义，元字符包括：  
+  ( ) [ ] { } \ ^ $ | ? * + .  
+  ```
+  //匹配所有的以"at"结尾的3个字符的组合，忽略大小写
+  var pattern1 = /.at/gi;
+  //匹配所有的".at"，忽略大小写
+  var pattern2 = /\.at/gi;
+  ```
+  也可以使用RegExp构造函数创建正则表达式：  
+  ```
+  var pattern1 = new RegExp(".at","gi");    //注意2个参数都是字符串形式的！
+  ```
+  使用test()函数检测字符串与模式是否匹配：  
+  ```
+  var text="000-00-0000";
+  var pattern = /\d{3}-\d{2}-\d{4}/gi;
+  pattern.test(text);
+  ```
+  ```
+  [输出]
+  true
+  ```
+> ## Function类型  
+  + 定义函数  
+  定义函数的3种方式：  
+  ```
+  //方式1：函数声明定义函数
+  function sum(num1, num2){
+      return num1 + num2;
+  }
+
+  //方式2：函数表达式定义函数
+  var sum = function(num1, num2){
+      return num1 + num2;
+  }
+
+  //方式3：构造函数定义函数（不推荐）
+  var sum = new Function("num1", "num2", "return num1 + num2");    //前面的参数作为函数参数，最后一个参数视作函数体
+  ```
+  函数其实是Function类型的实例，因此函数也是对象，函数名实际上是一个指向函数对象的指针。  
+  ```
+  function sum(num1, num2){
+      return num1 + num2;
+  }
+
+  console.log(sum(1,2));
+
+  var anotherSum = sum;
+  console.log(anotherSum(3,4));
+
+  sum = null;
+  console.log(anotherSum(3,4));    //sum指针变为null，并不会影响anotherSum这个指针
+  ```
+  ```
+  [输出]
+  3
+  7
+  7
+  ```
+  + 没有重载  
+  由于没有函数签名，所以ECMAScript中没有重载的概念。同名函数后面的函数会覆盖前面的。  
+
+  ```
+  function sum(num1, num2){
+      return num1 + num2;
+  }
+
+  function sum(num1, num2, num3){
+    return num1 + num2 + num3;
+  }
+
+  console.log(sum(1,2,3));
+  ```
+  ```
+  [输出]
+  6
+  ```
+  其实上面的代码等价于：  
+  ```
+  var sum = function(num1, num2){
+      return num1 + num2;
+  };
+
+  sum = function(num1, num2, num3){
+    return num1 + num2 + num3;
+  };
+
+  console.log(sum(1,2,3));
+  ```
+  这样可以更直观的看出，后面的sum覆盖了前面的。  
+  
+  在代码开始执行之前，解析器会通过一个名为函数声明提升（function declaration hoisting）的过程读取全部函数声明并添加到相应的执行环境中。所以，可以先调用函数，再去用函数声明的方式定义该函数。  
+  ```
+  console.log(sum(1,2));
+  function sum(num1, num2){
+      return num1 + num2;
+  }
+  ```
+  ```
+  [输出]
+  3
+  ```
+  而如果函数是利用函数表达式定义的，则必须等到解析器执行到它所在的代码行，才会被解析执行。  
+  ```
+  console.log(sum(1,2)); 
+  var sum = function(num1, num2){
+      return num1 + num2;
+  };
+  ```
+  ```
+  [输出]
+  TypeError: sum is not a function
+  ```
+  + 作为值的函数  
+  因为函数名本身就是变量，所以函数也可以作为值来使用。  
+  现在假设有一个数组对象，需要按照对象的某个属性来进行排序，可以这样写：  
+  ```
+  function createComparisonFunction(propertyName){
+    //该函数返回一个比较函数
+    return function(obj1, obj2){
+      var val1 = obj1[propertyName];    //因为这里属性值是变量，只能使用方括号表示法
+      var val2 = obj2[propertyName];
+      if(val1 < val2){
+        return -1;
+      }else if(val1 > val2){
+        return 1;
+      }else{
+        return 0;
+      }
+    }
+  }
+
+  var data = [{name: "Zhang", age:20},{name: "Li", age:30}];
+  //按name属性排序
+  data.sort(createComparisonFunction("name"));
+  console.log(data);
+  //按age属性排序
+  data.sort(createComparisonFunction("age"));
+  console.log(data);
+  ```
+  ```
+  [输出]
+  [Object { name="Li", age=30}, Object { name="Zhang", age=20}]
+  [Object { name="Zhang", age=20}, Object { name="Li", age=30}]
+  ```
+  函数内部有2个特殊对象：arguments和this。  
+  
+  
+  + arguments对象  
+  arguments包含传入函数的参数数组，它还有1个名为callee的属性，指向函数本身。  
+  ```
+  //递归函数
+  function factorial(num){
+    if(num <= 1){
+      return 1;
+    }else{
+      return num * arguments.callee(num - 1);    //使用arguments.callee调用函数本身，能够不依赖函数名
+    }
+  }
+
+  var newFactorial = factorial;
+  factorial = function(){    
+    return 0;
+  }
+
+  console.log(newFactorial(5));
+  console.log(factorial(5));
+  ```
+  ```
+  [输出]
+  120
+  0
+  ```
+  + this对象  
+  函数内部的另一个特殊对象就是this，this指向函数所在的执行环境，当在全局作用域中调用函数时，this对象引用的就是window。  
+  ```
+  var color = "red";
+
+  function showColor(){
+    console.log(this.color);
+  }
+
+  var obj = {
+    color : "blue",
+    showColor : showColor
+  };
+
+  showColor();    //获取的是window.color
+  obj.showColor();    //获取的是obj.color
+  ```
+  ```
+  [输出]
+  red
+  blue
+  ```
+  + 函数属性  
+  ECMAScript中的函数也是对象，因此也有属性和方法。每个函数都包含2个属性：length和prototype。
+
+length属性表示函数的参数个数：  
+  ```
+  function sum(num1, num2){
+    return num1 + num2;
+  }
+  console.log(sum.length);
+  ```
+  ```
+  [输出]
+  2
+  ```
+  + apply和call方法  
+  每个函数都包含apply()和call()方法，用来在特定的作用域中调用函数。  
+  apply()方法接收2个参数：一是作用域，二是传入的参数（Array实例或者arguments对象）；  
+  call()方法接收1个以上不确定参数：第一个参数依旧是作用域，其余参数都直接列出传入函数。  
+  ```
+  function sum(num1, num2){
+    return num1 + num2;
+  }
+
+  function callSum1(num1, num2){
+    return sum.apply(this,[num1, num2]);
+  }
+
+  function callSum2(num1, num2){
+    return sum.apply(this,arguments);
+  }
+
+  function callSum3(num1, num2){
+    return sum.call(this,num1,num2);
+  }
+
+  console.log(callSum1(10,10));
+  console.log(callSum2(10,10));
+  console.log(callSum3(10,10));
+  ```
+  ```
+  [输出]
+  20
+  20
+  20
+  ```
+  apply()和call()常用来扩充函数的作用域：  
+  ```
+  var color = "red";
+
+  function showColor(){
+    console.log(this.color);
+  }
+
+  var obj = {
+    color : "blue",
+  };
+
+  showColor.call(this);
+  showColor.call(window);
+  showColor.call(obj);    //showColor()中的this指向了obj
+  ```
+  ```
+  [输出]
+  red
+  red
+  blue
+  ```
+  上述代码的好处是：对象不需要与方法有任何耦合关系，前面的例子中obj对象需要定义一个showColor()方法，而这个例子就不需要了。  
+  
+  
+  + bind方法  
+  此外，函数还有一个方法：bind()，它会创建一个函数的实例，this值会被绑定到传给bind()的参数值。  
+  ```
+  var color = "red";
+
+  function showColor(){
+    console.log(this.color);
+  }
+
+  var obj = {
+    color : "blue",
+  };
+
+  var showColorObj = showColor.bind(obj);
+  showColorObj();
+  ```
+  ```
+  [输出]
+  blue
+  ```
+  
+  
+> ## 基本包装类型  
+  每当读取一个基本类型值的时候，后台就会创建一个对应的基本包装类型的对象，从而让我们方便调用一些方法来操作这些数据。  
+  3个基本包装类型：Boolean、Number、String。  
+  因为有了基本包装类型，所以JavaScript中的基本类型可以当做对象来访问。  
+  
+
+  
+
+
+  
 
 
 
+  
+
+
+  
+  
+  
+
+  
+  
+  
+  
+
+
+
+
+  
 
   
   
