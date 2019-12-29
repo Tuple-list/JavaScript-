@@ -54,11 +54,11 @@ console.log(message);     //输出Hi
 
 
   可以在一条语句中定义多个变量，支持使用不同类型初始化变量：  
-```
-var message = "Hi",
-    data,
-    age = 20;
-```  
+  ```
+  var message = "Hi",
+  data,
+  age = 20;
+  ```  
 
 > ## 数据类型  
   ECMAScript有5种基本数据类型：Undefined、Null、Boolean、Number和String，还有1种复杂数据类型：Object。  
@@ -105,7 +105,10 @@ function
   Null类型也只有1个值：null。  
   null表示一个空对象指针，所以typeof null返回的是object。  
   实际上，undefined类型是派生自null值的，所以对他们的相等性测试会返回true：  
-  > console.log(null == undefined);  [输出] true  
+  > console.log(null == undefined); 
+  ```
+  [输出] true  
+  ```
 
   任何情况下，都没有必要将一个变量的值显式设定为undefined；  
   而如果一个变量是用来存储对象的，在初始化时最好明确赋给null值，以区分null和undefined。  
@@ -580,9 +583,10 @@ function
   ```
   
                                                     【END】
-                                                 
+                                                    
+---                                                 
                                           JavaScript学习笔记（五）引用类型
----  
+                                            
 
 > ## Object类型    
   创建引用类型（如Object）实例的方式有2种，第一种是使用new操作符后跟Object构造函数：  
@@ -662,7 +666,7 @@ function
   ```
   var colors = ["red", "blue", "green"];
   console.log(colors[0]);
-  colors[4] = "yellow";    //索引不存在则新建项
+  colors[4] = "yellow";                            //索引不存在则新建项
   colors[colors.length] = "brown";    //利用length属性可以方便地在数组末尾添加项
   console.log(colors);
   ```  
@@ -775,7 +779,7 @@ function
   red,blue,green,white,brown
   ```
   + 截取子数组  
-  slice()会基于原数组返回一个子数组，原数组不会改变。第一个参数是起始位置，第二个参数（可选）是结束位置。注意：包含起始位置项但不包含结束位置项！  
+  slice()会基于原数组返回一个子数组，原数组不会改变。第一个参数是起始位置，第二个参数（可选）是结束位置。注意：包含起始位置项但不包含结束位置项！    
   ```
   var colors = ["red","blue","green", "white"];
   var colors2 = colors.slice(1);
@@ -996,7 +1000,7 @@ function
   7
   7
   ```  
-  + 没有重载  
+  + 没有重载    
   由于没有函数签名，所以ECMAScript中没有重载的概念。同名函数后面的函数会覆盖前面的。  
 
   ```
@@ -1514,7 +1518,7 @@ function
 ---  
                                     JavaScript学习笔记（六）创建对象  
 
-  > **摘要：创建对象的多种方式及其各自的优缺点分析。**  
+> **摘要：创建对象的多种方式及其各自的优缺点分析。**    
   
 > ## 工厂模式  
   ```
@@ -1555,7 +1559,7 @@ function
      2.将构造函数Person()的作用域赋给该对象（即this指向该对象）；  
      3.执行构造函数Person()中的代码，创建初始的属性和方法；  
      4.返回刚刚创建的Person对象。  
-   person1和person2分别保存着Person的不同的实例，都是Person类型的对象，这也是构造函数模式胜过工厂模式的地方。  
+  person1和person2分别保存着Person的不同的实例，都是Person类型的对象，这也是构造函数模式胜过工厂模式的地方。  
   ```
   console.log(person1 instanceof Person);
   console.log(person1 instanceof Object);
@@ -1876,7 +1880,7 @@ function
   ```  
   
   
-> ## 动态原型模式  
+> ## 动态原型模式      
   动态原型模式将全部的信息都封装在了构造函数中，并通过检查需要共享的方法是否存在，来决定是否要初始化原型。这是一个堪称完美的模式。  
   ```
   function Person(name,age){
@@ -1894,7 +1898,7 @@ function
   ```
 
 
-> ## 寄生构造函数模式  
+> ## 寄生构造函数模式    
   在构造函数中封装创建对象的代码，然后再返回新创建的对象。  
   ```
   function Person(name, age) {
@@ -1945,9 +1949,9 @@ function
   var person = Person("Sky", 26);
   person.sayName();
   ```  
-  这样，变量person中保存的就是一个稳妥对象，除了调用sayName()方法外，没有别的方式可以访问其数据成员。  
+  这样，变量person中保存的就是一个稳妥对象，除了调用sayName()方法外，没有别的方式可以访问其数据成员。    
   
-                                                     【END】 
+                                                     【END】   
   
 
 
