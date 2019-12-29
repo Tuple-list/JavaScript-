@@ -5,7 +5,7 @@
 
 [iBlog](https://skysun.name/blog/javascript)
 
-<h1>JavaScript学习笔记（三）基本概念</h1>  
+                              <h1>JavaScript学习笔记（三）基本概念</h1>  
 
 > ## 严格模式  
   ECMAScript5引入了严格模式（strict mode）概念，严格模式为JavaScript定义了一种不同的解析与执行模型，
@@ -410,10 +410,12 @@ function
   [输出]
   20
   15
-  ```
+  ```  
+  
+                                                      <h2>【END】</h2>   
 ---  
-<h1>JavaScript学习笔记（四）基本概念</h1> 
----
+                                           <h1>JavaScript学习笔记（四）基本概念</h1> 
+
 
 [摘要] JavaScript中的变量类型、参数传递、执行环境、内存问题等。  
 > ## 基本类型和引用类型的值  
@@ -577,8 +579,9 @@ function
   globalPerson = null;
   ```
   
----  
-<h1>JavaScript学习笔记（五）引用类型</h1>   
+                                                 <h2>【END】</h2>   
+                                                 
+                                        <h1>JavaScript学习笔记（五）引用类型</h1>   
 ---  
 
 > ## Object类型    
@@ -1506,8 +1509,10 @@ function
   console.log(color);
   ```  
   
+                                       <h2>【END】</h2> 
+  
 ---  
-<h1>JavaScript学习笔记（六）创建对象</h1>   
+                                <h1>JavaScript学习笔记（六）创建对象</h1>   
 
   > **摘要：创建对象的多种方式及其各自的优缺点分析。**  
   
@@ -1656,7 +1661,7 @@ function
   Object.getPrototypeOf(person1).sayName();
   ```
 
-  ````
+  ```
   [输出]
   true
   Sky
@@ -1942,7 +1947,7 @@ function
   ```  
   这样，变量person中保存的就是一个稳妥对象，除了调用sayName()方法外，没有别的方式可以访问其数据成员。  
   
-  <h2>【END】</h2>  
+                                                 <h2>【END】</h2>  
   
 
 
