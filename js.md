@@ -174,6 +174,7 @@ function
   console.log(isNaN(Infinity));    //无穷大
   console.log(isNaN(true));    //可以被转为1
   ```  
+  ```
   [输出]  
   true  
   true  
@@ -181,6 +182,7 @@ function
   false  
   false  
   false  
+  ```
   
   有3个函数可以将非数值转为数值：Number()、parseInt()、parseFloat()。  
   Number()函数可以接收任何对象作为参数：  
@@ -192,6 +194,7 @@ function
   console.log(Number(null));
   console.log(Number(true));
   ```  
+  ```
   [输出]  
   NaN  
   NaN  
@@ -199,6 +202,7 @@ function
   123  
   0  
   1  
+  ```
   
   parseInt()函数会尝试转换为整数值，只可以接收字符串作为参数，它会依次解析每一个字符直至遇到非数字字符：  
   ```
@@ -321,7 +325,7 @@ function
   }
   console.log(i);
   ```
-  > 注意：在整个循环体内部定义的变量，在循环体外也依然可以获取。  
+  > **注意：在整个循环体内部定义的变量，在循环体外也依然可以获取。**  
 + for-in语句  
   for-in可以用来枚举对象的属性：  
   ```
@@ -329,7 +333,7 @@ function
   console.log(propName);
   }
   ```
-  > 注意：在枚举前最好先检测对象是否为null或undefined，否则可能会报错。  
+  > **注意：在枚举前最好先检测对象是否为null或undefined，否则可能会报错。**  
 + lable、break与continue语句  
   使用label语句可以在代码中添加标签，以便将来使用，常用在for循环前面。  
   break会跳出整个循环，执行循环体后面的语句；continue会跳出本次循环，开始下一次循环。  
@@ -370,7 +374,7 @@ function
   [输出]
   1 or 2
   ```
-  > 注意：switch语句在比较时采用的是全等（===）操作符，即类型和值都要一致。  
+  > **注意：switch语句在比较时采用的是全等（===）操作符，即类型和值都要一致。**  
   
 > ## 函数  
   + arguments对象  
@@ -435,7 +439,7 @@ function
   [输出]
   undefined
   ```
-  > 注意：ECMAScript中String是基本类型（5个基本类型：undefined、null、Boolean、Number、String）。  
+  > **注意：ECMAScript中String是基本类型（5个基本类型：undefined、null、Boolean、Number、String）。**  
   + 复制变量值  
   基本类型的值在复制时，会在变量对象上创建一个新值，然后将该值复制到为新变量分配的位置上，即复制后两个变量是完全独立的，不会相互影响。  
   ```
@@ -524,7 +528,7 @@ function
   确定一个值是哪种基本类型可以用typeof，是哪种引用类型可以用instanceof。  
 
 > ## 执行环境  
-  执行环境（execution context）是JavaScript中最重要的一个概念，它定义了变量和函数有权访问的其它数据，决定了它们各自的行为。每一个执行环境当中定义的   所有的变量和函数都保存在一个变量对象（variable object）中。  
+  执行环境（execution context）是JavaScript中最重要的一个概念，它定义了变量和函数有权访问的其它数据，决定了它们各自的行为。每一个执行环境当中定义的所有的变量和函数都保存在一个变量对象（variable object）中。  
   执行环境分为全局执行环境和局部（函数）执行环境，全局执行环境是最外围的一个执行环境，对Web浏览器来说，全局执行环境就是window对象，所有全局变量和函   数都是作为window对象的属性和方法创建的。每个函数也都有自己的执行环境，即局部执行环境。  
   
   JavaScript中没有块级作用域的概念，在if或for中定义的变量，在外部依然可以访问到，因为它们处在相同的执行环境中。  
@@ -575,8 +579,9 @@ function
   
 ---  
 <h2>JavaScript学习笔记（五）引用类型</h2>   
----
-> ## Object类型  
+---  
+
+> ## Object类型    
   创建引用类型（如Object）实例的方式有2种，第一种是使用new操作符后跟Object构造函数：  
   ```
   var person = new Object();
@@ -617,6 +622,7 @@ function
     name: "Sky"
   });
   ```
+  
   ```
   [输出]
   name: Sky
@@ -641,12 +647,13 @@ function
   var colors = new Array(3);    //创建一个长度为3的数组
   var colors = new Array("red", "blue", "green");    //创建数组并传递应该包含的项
   var colors = Array();    //new可以省略
-  ```
+  ```  
   也可以使用数组字面量表示法：  
   ```
   var colors = [];    //创建空数组
   var colors = ["red", "blue", "green"];    //创建包含3个项的数组
-  ```
+  ```  
+  
   + 访问数组  
   使用数字索引来访问或设置数组的值。  
   ```
@@ -655,19 +662,22 @@ function
   colors[4] = "yellow";    //索引不存在则新建项
   colors[colors.length] = "brown";    //利用length属性可以方便地在数组末尾添加项
   console.log(colors);
-  ```
+  ```  
+  
   ```
   [输出]
   red
   ["red", "blue", "green", undefined, "yellow", "brown"]
-  ```
-  > 注意：数组的length属性不是只读的！  
+  ```  
+  
+  > **注意：数组的length属性不是只读的！**    
   
   ```
   var colors = ["red", "blue", "green"];
   colors.length = 2;    //最后一项被删除了
   console.log(colors);
   ```
+  
   ```
   [输出]
   ["red", "blue"]
@@ -683,7 +693,6 @@ function
   ```
   + 输出数组  
   使用toString()、valueOf()、join()可以将数组直接输出出来，默认以逗号分隔每项。  
-  
   ```
   alert(colors.toString());
   alert(colors.valueOf());
@@ -691,6 +700,7 @@ function
   alert(colors.join());
   alert(colors.join("|"));
   ```
+  
   ```
   [输出]
   red,blue
@@ -698,7 +708,7 @@ function
   red,blue
   red,blue
   red|blue
-  ```
+  ```  
   + push与pop  
   栈是一种LIFO（Last-In-First-Out，后进先出）的数据结构，ECMAScript为数组提供了push()-推入和pop()-弹出的方法实现栈的行为。  
   push()接收任意数量参数，逐个添加到数组末尾，返回修改后数组长度；  
@@ -742,6 +752,7 @@ function
     return value1 - value2;
   }
   ```
+  
   ```
   [输出]
   [0, 1, 5, 10, 15]
@@ -770,18 +781,19 @@ function
   console.log(colors2.toString());
   console.log(colors3.toString());
   ```
+  
   ```
   [输出]
   red,blue,green,white
   blue,green,white
   blue,green
-  ```
+  ```  
   + splice方法  
   splice()算是最强大的数组方法了，主要的用法：  
   删除：splice(0,2)删除第0位置开始的2项；  
   插入：splice(1,0,"a","b")删除位置1开始的0项（即不删除项），并在位置1处插入"a","b"两项；  
   替换：splice(1,1,"a","b")删除位置1开始的1项，并在位置1处插入"a","b"两项。  
-  > 注意：splice是直接修改原数组的，返回值是被删除的数组集合。  
+  > **注意：splice是直接修改原数组的，返回值是被删除的数组集合。**    
   ```
   var colors = ["red","blue","green", "white"];
   var removed = colors.splice(0,1);
@@ -794,14 +806,15 @@ function
   console.log(colors.toString());
   console.log(removed.toString());
   ```
+  
   ```
-  [输出]
-  blue,green,white
-  red
-  blue,yellow,green,white
-  (空字符串)
-  blue,black,gray,white
-  yellow,green
+  [输出]  
+  blue,green,white  
+  red  
+  blue,yellow,green,white  
+  (空字符串)  
+  blue,black,gray,white  
+  yellow,green  
   ```
   + 获取位置  
   indexOf()从位置0开始查找项，lastIndexOf()从数组末尾开始查找。可选的第2个参数：开始查找的起点位置。  
@@ -811,13 +824,14 @@ function
   console.log(colors.indexOf("red",1));
   console.log(colors.lastIndexOf("red"));
   ```
+  
   ```
   [输出]
   0
   3
   3
-  ```
-  > 注意：比较项是否相等，采用的是全等操作符（===），类型和值都必须一致。  
+  ```  
+  > **注意：比较项是否相等，采用的是全等操作符（===），类型和值都必须一致。**    
   
   + 数组迭代  
   几个常用的迭代函数：  
@@ -863,6 +877,7 @@ function
   console.log(sum);
   console.log(nums.toString());    //上面的操作不会修改原数组
   ```
+  
   ```
   [输出]
   false
@@ -871,7 +886,7 @@ function
   2,3,4,5,6
   15
   1,2,3,4,5
-  ```
+  ```  
 > ## Date类型  
   使用new Date()创建一个日期对象。  
   Date.parse()和Date.UTC()都返回表示日期的毫秒数，Date.parse()传递一个表示日期的字符串，而Date.UTC()传入年、月、日、时、分、秒，其中年、月必填，月是从0开始，小时是24小时制的。  
@@ -881,7 +896,7 @@ function
   var date2 = new Date(Date.parse("8/19/2015"));    //与上面等价
   var date3 = new Date(2015,10,17,22,18,56);    //注意10代表11月，因为月份是从0开始的    
   var date4 = new Date(Date.UTC(2015,10,17,22,18,56));    //与上面等价
-  ```
+  ```  
   关于Date类型的常用方法：  
   ```
   var now = new Date();
@@ -895,6 +910,7 @@ function
   console.log(now.getMilliseconds());
   console.log(now.getTimezoneOffset());    //本地时间与UTC时间相差的分钟数
   ```
+  
   ```
   [输出]
   2015
@@ -922,16 +938,19 @@ function
   //匹配所有的".at"，忽略大小写
   var pattern2 = /\.at/gi;
   ```
+  
   也可以使用RegExp构造函数创建正则表达式：  
   ```
   var pattern1 = new RegExp(".at","gi");    //注意2个参数都是字符串形式的！
   ```
+  
   使用test()函数检测字符串与模式是否匹配：  
   ```
   var text="000-00-0000";
   var pattern = /\d{3}-\d{2}-\d{4}/gi;
   pattern.test(text);
   ```
+  
   ```
   [输出]
   true
@@ -967,12 +986,13 @@ function
   sum = null;
   console.log(anotherSum(3,4));    //sum指针变为null，并不会影响anotherSum这个指针
   ```
+  
   ```
   [输出]
   3
   7
   7
-  ```
+  ```  
   + 没有重载  
   由于没有函数签名，所以ECMAScript中没有重载的概念。同名函数后面的函数会覆盖前面的。  
 
@@ -987,6 +1007,7 @@ function
 
   console.log(sum(1,2,3));
   ```
+  
   ```
   [输出]
   6
@@ -1012,6 +1033,7 @@ function
       return num1 + num2;
   }
   ```
+  
   ```
   [输出]
   3
@@ -1023,6 +1045,7 @@ function
       return num1 + num2;
   };
   ```
+  
   ```
   [输出]
   TypeError: sum is not a function
@@ -1054,11 +1077,12 @@ function
   data.sort(createComparisonFunction("age"));
   console.log(data);
   ```
+  
   ```
   [输出]
   [Object { name="Li", age=30}, Object { name="Zhang", age=20}]
   [Object { name="Zhang", age=20}, Object { name="Li", age=30}]
-  ```
+  ```  
   函数内部有2个特殊对象：arguments和this。  
   
   
@@ -1082,6 +1106,7 @@ function
   console.log(newFactorial(5));
   console.log(factorial(5));
   ```
+  
   ```
   [输出]
   120
@@ -1104,6 +1129,7 @@ function
   showColor();    //获取的是window.color
   obj.showColor();    //获取的是obj.color
   ```
+  
   ```
   [输出]
   red
@@ -1112,13 +1138,14 @@ function
   + 函数属性  
   ECMAScript中的函数也是对象，因此也有属性和方法。每个函数都包含2个属性：length和prototype。
 
-length属性表示函数的参数个数：  
+  length属性表示函数的参数个数：  
   ```
   function sum(num1, num2){
     return num1 + num2;
   }
   console.log(sum.length);
   ```
+  
   ```
   [输出]
   2
@@ -1148,6 +1175,7 @@ length属性表示函数的参数个数：
   console.log(callSum2(10,10));
   console.log(callSum3(10,10));
   ```
+  
   ```
   [输出]
   20
@@ -1170,6 +1198,7 @@ length属性表示函数的参数个数：
   showColor.call(window);
   showColor.call(obj);    //showColor()中的this指向了obj
   ```
+  
   ```
   [输出]
   red
@@ -1195,6 +1224,7 @@ length属性表示函数的参数个数：
   var showColorObj = showColor.bind(obj);
   showColorObj();
   ```
+  
   ```
   [输出]
   blue
@@ -1211,45 +1241,4 @@ length属性表示函数的参数个数：
 
 
   
-
-
-
-  
-
-
-  
-  
-  
-
-  
-  
-  
-  
-
-
-
-
-  
-
-  
-  
-
-
-
-  
-
-
-  
-  
-
-
-
-
-
-
-
-
-
-
-
 
