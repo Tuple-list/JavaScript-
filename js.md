@@ -5,7 +5,7 @@
 
 [iBlog](https://skysun.name/blog/javascript)
 
-<h2>JavaScript学习笔记（三）基本概念</h2>  
+<h1>JavaScript学习笔记（三）基本概念</h1>  
 
 > ## 严格模式  
   ECMAScript5引入了严格模式（strict mode）概念，严格模式为JavaScript定义了一种不同的解析与执行模型，
@@ -412,7 +412,7 @@ function
   15
   ```
 ---  
-<h2>JavaScript学习笔记（四）基本概念</h2> 
+<h1>JavaScript学习笔记（四）基本概念</h1> 
 ---
 
 [摘要] JavaScript中的变量类型、参数传递、执行环境、内存问题等。  
@@ -578,7 +578,7 @@ function
   ```
   
 ---  
-<h2>JavaScript学习笔记（五）引用类型</h2>   
+<h1>JavaScript学习笔记（五）引用类型</h1>   
 ---  
 
 > ## Object类型    
@@ -1235,6 +1235,302 @@ function
   每当读取一个基本类型值的时候，后台就会创建一个对应的基本包装类型的对象，从而让我们方便调用一些方法来操作这些数据。  
   3个基本包装类型：Boolean、Number、String。  
   因为有了基本包装类型，所以JavaScript中的基本类型可以当做对象来访问。  
+  ```
+  var s1 = "some text";
+  var s2 = s1.substring(2);
+  ```
+  
+  相当于后台作了下列处理：  
+  ```
+  var s1 = new String("some text");
+  var s2 = s1.substring(2);
+  s1 = null;
+  ```
+  
+  Number类型的toFixed方法，会按照指定的小数位数返回四舍五入后的值。  
+  ```
+  var num1 = 10;
+  console.log(num1.toFixed(2));
+  var num2 = 10.005;
+  console.log(num2.toFixed(2));
+  ```  
+  
+  ```
+  [输出]
+  10.00
+  10.01
+  ```  
+  
+  String的几个常用方法：  
+  1.字符方法  
+  ```
+  var str = "hello world";
+  //返回给定位置的单字符的字符串
+  console.log(str.charAt(1));
+  //返回给定位置的字符编码 
+  console.log(str.charCodeAt(1));
+  //返回方括号内索引位置的单字符的字符串
+  console.log(str[1]);
+  ```  
+  
+  ```
+  [输出]
+  e
+  101
+  e
+  ```  
+  2. 操作方法  
+  ```  
+  var str1 = "hello";
+  //concat可以接收一个或多个参数来拼接返回字符串
+  var str = str1.concat(" ","world");
+  console.log(str);
+  //截取从位置3开始到最后的字符串
+  console.log(str.slice(3));
+  //截取从位置3开始到位置7结束的字符串，注意不包含位置7
+  console.log(str.slice(3,7));
+  //同slice()
+  console.log(str.substring(3));
+  //同slice()
+  console.log(str.substring(3,7));
+  //截取从位置3开始到最后的字符串
+  console.log(str.substr(3));
+  //截取从位置3开始的长度为7的字符串
+  console.log(str.substr(3,7));
+  ```
+
+  ```
+  [输出]
+  hello world
+  lo world
+  lo w
+  lo world
+  lo w
+  lo world
+  lo worl
+  ```  
+  
+  3. 位置方法  
+  ```
+  var str = "hello world";
+  //搜索不到的子字符串，则返回-1
+  console.log(str.indexOf("a"));
+  //从左往右查找的第一个子字符串位置
+  console.log(str.indexOf("o"));
+  //从右往左查找的第一个子字符串位置
+  console.log(str.lastIndexOf("o"));
+  //从指定位置开始往右查找的第一个子字符串位置
+  console.log(str.indexOf("o",5));
+  //从指定位置开始往左查找的第一个子字符串位置
+  console.log(str.lastIndexOf("o",5));
+  ```  
+
+  ```
+  [输出]
+  -1
+  4
+  7
+  7
+  4
+  ```  
+  在使用第二个参数的情况下，可以通过循环调用indexOf()或lastIndexOf()来找到所有匹配的子字符串。  
+  ```
+  var str = "hello world";
+  var positions = new Array();
+  var pos = str.indexOf("o");
+
+  while(pos > -1){
+    positions.push(pos);
+    pos = str.indexOf("o", pos + 1);    //从找到的子字符串的下一个位置开始，再次寻找
+  }
+  console.log(positions.toString());
+  ```  
+
+  ```
+  [输出]
+  4,7
+  ```  
+  4. trim()方法  
+  ```
+  var str1 = "  hello world   ";
+  var str = str1.trim();    //会删除前面和后面的全部空格
+  console.log(str);
+  ```
+
+  ```
+  [输出]
+  hello world
+  ```  
+  5. 大小写转换方法  
+  ```
+  var str = "hello world";
+  console.log(str.toUpperCase());    //转为大写
+  console.log(str.toLocaleUpperCase());    //针对特殊地区作了处理的大写转换
+  console.log(str.toLowerCase());    //转为小写
+  console.log(str.toLocaleLowerCase());    //针对特殊地区作了处理的小写转换
+  ```  
+
+  ```
+  [输出]
+  HELLO WORLD
+  HELLO WORLD
+  hello world
+  hello world
+  ```  
+  
+> ## 单体内置对象  
+  + Global对象  
+  内置对象是指由ECMAScript提供的、不依赖于宿主环境的对象，不必显式地实例化它们。Object、Array、String、Global、Math等都是内置对象。  
+  
+  在全局作用域中定义的所有属性和函数，其实都是Global对象的属性和函数。  
+  
+  Global对象的encodeURI()和encodeURIComponent()方法可以对URI（Uniform Resource Identifiers，通用资源标识符）进行编码，以使浏览器能够理解。  
+  
+  其中encodeURI()不会对诸如":"、"/"、"?"、"#"等本身属于URI的特殊字符编码，而encodeURIComponent会对所有字符进行编码。  
+  ```
+  var uri = "http://www.abc.com/illegal value.html#start";
+  console.log(encodeURI(uri));
+  console.log(encodeURIComponent(uri));
+  ```
+
+  ```
+  [输出]
+  http://www.abc.com/illegal%20value.html#start
+  http%3A%2F%2Fwww.abc.com%2Fillegal%20value.html%23start
+  ```  
+  
+  对应的2个解码方法是decodeURI()和decodeURIComponent()，其中decodeURI()只能对使用encodeURI()替换的字符进行解码，而decodeURIComponent()能够解码任意特殊字符。  
+  ```
+  var uri = "http%3A%2F%2Fwww.abc.com%2Fillegal%20value.html%23start ";
+  console.log(decodeURI(uri));
+  console.log(decodeURIComponent(uri));
+  ```
+  ```
+  [输出]
+  http%3A%2F%2Fwww.abc.com%2Fillegal value.html%23start
+  http://www.abc.com/illegal value.html#start
+  ```  
+  
+  eval()函数可以接收一个字符串参数，并把它当做实际的ECMAScript语句来解析。  
+  ```
+  eval("function Hi(){console.log(\"Hi!\");}");
+  Hi();
+  ```
+  
+  ```
+  [输出]
+  Hi!
+  ```  
+  
+  获取Global对象的2种方式： 
+  1. web浏览器将Global对象作为window对象的一部分加以实现，可以用window来访问全局作用域中声明的变量和函数。  
+  ```
+  var color = "red";
+  function sayColor(){
+    console.log(window.color);
+  }
+  window.sayColor();
+  ```
+
+  ```
+  [输出]
+  red
+  ```  
+  2. 返回全局this对象。  
+  ```
+  //定义global对象，注意最后的括号，有括号代表函数的执行
+  var global = function(){
+    return this;
+  }();
+
+  var color = "red";
+  function sayColor(){
+    console.log(global.color);
+  }
+  global.sayColor();
+  ```
+
+  + Math对象  
+  Math对象的一些常用方法：  
+  min()和max()可以接收任意多个参数，并返回最小和最大的值。如果要对用于数组，可以使用函数的apply方法。  
+  ```
+  var nums = [1,2,3,4,5];
+  console.log(Math.max(1,2,3,4,5));
+  //console.log(Math.max(nums));    //错误！不可以直接传递数组作为参数
+  console.log(Math.max.apply(Math,nums));    //Math对象作为作用域，数组作为第二个参数
+  ```
+
+  ```
+  [输出]
+  5
+  5
+  ```  
+  几个舍入方法：Math.ceil()向上舍入，Math.floor()向下舍入，Math.round()四舍五入。  
+    ```
+    console.log(Math.ceil(25.1));
+    console.log(Math.ceil(25.9));
+
+    console.log(Math.floor(25.1));
+    console.log(Math.floor(25.9));
+
+    console.log(Math.round(25.1));
+    console.log(Math.round(25.9));
+    ```
+
+  ```
+  [输出]
+  26
+  26
+  25
+  25
+  25
+  26
+  ```  
+  Math.random()会返回一个介于0和1之间的随机小数，不包括0和1。下面的公式可以从某个整数范围内随机选择一个值：  
+  值 = Math.floor(Math.random() * 一共多少个可能值 + 第1个可能值)  
+  
+  一个通用的返回一定范围内随机整数的函数：  
+  ```
+  //返回2个值之间的随机数
+  function randomFrom(lowerValue,upperValue){
+    var choices = upperValue - lowerValue + 1;
+    return Math.floor(Math.random() * choices + lowerValue);
+  }
+
+  console.log(randomFrom(2,10));
+  ```  
+  使用场景示例——返回数组中的随机对象：  
+  ```
+  var colors = ["red","yellow","blue","green","white"];
+  var color = colors[randomFrom(0,colors.length - 1)];
+  console.log(color);
+  ```  
+  
+---  
+<h1>JavaScript学习笔记（六）创建对象</h1>   
+
+  > **摘要：创建对象的多种方式及其各自的优缺点分析。**  
+  
+> ## 工厂模式  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+
+  
+  
   
 
   
